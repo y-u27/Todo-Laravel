@@ -13,11 +13,15 @@
     <h1 class="text-3xl font-bold text-center">Todo</h1>
 
     <!-- Todo入力フォーム -->
-    <form class="flex flex-col gap-4 bg-white p-8 rounded-xl shadow-lg w-80" action="/todos" method="POST">
+    <form class="flex flex-row gap-4 bg-white p-8 rounded-xl shadow-lg w-220" action="/todos" method="POST">
       @csrf
       <div>
         <label class="mb-1 text-gray-700">タイトル：</label>
         <input class="w-full p-2 border-2 border-indigo-400 rounded-md" type="text" name="title">
+      </div>
+      <div>
+        <label>内容：</label>
+        <input class="w-full p-2 border-2 border-indigo-400 rounded-md" type="text" name="contents">
       </div>
       <div>
         <label class="mb-1 text-gray-700">ステータス：</label>
@@ -27,34 +31,33 @@
           <option value="2">完了</option>
         </select>
       </div>
-      <div>
-        <label>内容：</label>
-        <input class="w-full p-2 border-2 border-indigo-400 rounded-md" type="text" name="contents">
-      </div>
-      <button class="mt-4 bg-indigo-500 text-white py-2 rounded-md hover:bg-indigo-600 transition">追加</button>
+      <button class="h-10 w-15 mt-6 bg-indigo-500 text-white  rounded-md hover:bg-indigo-600 transition">追加</button>
     </form>
 
     <!-- Todo一覧 -->
-    <div class="flex flex-col gap-4 bg-white p-8 rounded-xl shadow-lg w-80 divide-y divide-gray-100">
-      <ul>
-        @foreach ($todos as $todo)
-        <li class="mb-1 text-gray-700">タイトル：{{ $todo->title }}</li>
-        <li class="mb-1 text-gray-700">内容：{{ $todo->contents }}</li>
-        <li class="mb-1 text-gray-700">ステータス：
-          @if ($todo->status == 0)
-          未完了
-          @elseif ($todo->status == 1)
-          進行中
-          @else
-          完了
-          @endif
-        </li>
-        <div class="flex items-center justify-center space-x-5 mt-3 mb-3">
-          <button class="px-4 py-1 bg-indigo-300 text-white rounded-md" type="button">編集</button>
-          <button class="px-4 py-1 bg-teal-300 text-white rounded-md">削除</button>
+    <div class="flex flex-col gap-4 items-center w-full mt-8">
+      @foreach ($todos as $todo)
+      <div class="bg-white rounded-xl shadow-lg px-8 py-6 w-full max-w-3xl">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div class="text-gray-700">
+            <p><strong>タイトル：</strong>{{ $todo->title }}</p>
+            <p><strong>内容：</strong>{{ $todo->contents }}</p>
+            <p><strong>ステータス</strong>
+              @if ($todo->status == 0)
+              未完了
+              @elseif ($todo->status == 1)
+              進行中
+              @else
+              完了
+              @endif
+            </p>
+          </div>
+          <div class="flex justify-end space-x-3 mt-1">
+            <button class="px-4 py-1 bg-indigo-300 text-white rounded-md" type="button"><a href="{{ route('todos.edit', $todo->id ) }}">編集</a></button>
+          </div>
         </div>
-        @endforeach
-      </ul>
+      </div>
+      @endforeach
     </div>
   </div>
 </body>
