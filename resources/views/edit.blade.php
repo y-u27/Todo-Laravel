@@ -13,8 +13,9 @@
     <h1 class="text-3xl font-bold text-center">Todoを編集・削除</h1>
 
     <!-- 更新フォーム -->
-    <form class="flex flex-col gap-4 bg-white p-8 rounded-xl shadow-lg w-80" action="/todos/{{ $todo->id }}" method="POST">
+    <form class="flex flex-col gap-4 bg-white p-8 rounded-xl shadow-lg w-80" action="{{ route('todos.update', $todo->id) }}" method="POST">
       @csrf
+      @method('PUT')
       <div>
         <label class="mb-1 text-gray-700">タイトル：</label>
         <input class="w-full p-2 border-2 border-indigo-400 rounded-md" name="title" value="{{ old('title', $todo->title ) }}">
@@ -34,13 +35,7 @@
       <button type="submit" class="mt-4 bg-indigo-500 text-white py-2 rounded-md hover:bg-indigo-600 transition">更新</button>
     </form>
 
-    <!-- 削除フォーム -->
-    <form action="{{ route('todos.destroy', $todo->id) }}" method="POST" class="mt-4" onsubmit="return confirm('本当に削除しますか');">
-      @csrf
-      @method('DELETE')
-      <button type="submit" class="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600">削除</button>
-    </form>
-
+    <!-- Todo一覧に戻る -->
     <a href="{{ url('/todos') }}" class="block text-center mt-4 text-gray-600 hover:underline">一覧に戻る</a>
   </div>
 </body>
