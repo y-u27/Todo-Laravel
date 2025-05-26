@@ -54,6 +54,13 @@
           </div>
           <div class="flex justify-end space-x-3 mt-1">
             <button class="px-4 py-1 bg-indigo-300 text-white rounded-md" type="button"><a href="{{ route('todos.edit', $todo->id ) }}">編集</a></button>
+
+            <!-- 削除フォーム -->
+            <form action="{{ route('todos.destroy', $todo->id) }}" method="POST" onsubmit="return confirm('本当に削除しますか');">
+              @csrf
+              @method('DELETE')
+              <button type="submit" class="px-4 py-1 bg-red-400 text-white rounded-md">削除</button>
+            </form>
           </div>
         </div>
       </div>
