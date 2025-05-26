@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class TodoController extends Controller
 {
+    // データ一覧
     public function index()
     {
         $todos = Todo::all();
@@ -27,6 +28,12 @@ class TodoController extends Controller
         return redirect('/todos');
     }
 
+    public function edit($id)
+    {
+        $todo = Todo::find($id);
+        return view('edit', ['todo' => $todo]);
+    }
+
     // データ更新
     public function update(Request $request, $id)
     {
@@ -43,7 +50,7 @@ class TodoController extends Controller
     }
 
     // データ削除
-    public function destory($id)
+    public function destroy($id)
     {
         $todo = Todo::find($id);
         $todo->delete();
