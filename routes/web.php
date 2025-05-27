@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +19,12 @@ Route::put('/todos/{id}', [TodoController::class, 'update'])->name('todos.update
 
 // データ削除
 Route::delete('/todos/{id}', [TodoController::class, 'destroy'])->name('todos.destroy');
+
+// ログインフォーム表示
+Route::get('/login',[LoginController::class, 'showLogin'])->name('showLogin');
+
+// ログイン処理
+Route::post('/login', [LoginController::class, 'login'])->name('login');
+
+// ログアウト処理
+Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
