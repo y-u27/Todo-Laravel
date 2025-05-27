@@ -8,10 +8,21 @@
   <title>Todo詳細</title>
 </head>
 
+
 <body class="flex items-center justify-center min-h-screen bg-gray-100">
   <div class="flex flex-col items-center space-y-6">
     <h1 class="text-3xl font-bold text-center">Todoを編集・削除</h1>
 
+    @if ($errors->any())
+    <div>
+      <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+      </ul>
+    </div>
+    @endif
+    
     <!-- 更新フォーム -->
     <form class="flex flex-col gap-4 bg-white p-8 rounded-xl shadow-lg w-80" action="{{ route('todos.update', $todo->id) }}" method="POST">
       @csrf
