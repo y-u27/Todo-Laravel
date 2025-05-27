@@ -12,6 +12,15 @@
   <div class="flex flex-col items-center space-y-6">
     <h1 class="text-3xl font-bold text-center">Todo</h1>
 
+    @if ($errors->any())
+    <div>
+      <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+      </ul>
+    </div>
+    @endif
     <!-- Todo入力フォーム -->
     <form class="flex flex-row gap-4 bg-white p-8 rounded-xl shadow-lg w-220" action="/todos" method="POST">
       @csrf
@@ -31,7 +40,7 @@
           <option value="2">完了</option>
         </select>
       </div>
-      <button class="h-10 w-15 mt-6 bg-indigo-500 text-white  rounded-md hover:bg-indigo-600 transition">追加</button>
+      <button class="h-10 w-20 mt-6 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 transition">追加</button>
     </form>
 
     <!-- Todo一覧 -->
@@ -65,6 +74,9 @@
         </div>
       </div>
       @endforeach
+    </div>
+    <div>
+      <a href="{{ url('/login') }}" class="block text-center mt-4 text-gray-600 hover:underline">ログアウト</a>
     </div>
   </div>
 </body>
