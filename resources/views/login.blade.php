@@ -35,6 +35,9 @@
       </div>
       <button type="submit" class="mt-4 bg-indigo-500 text-white py-2 rounded-md hover:bg-indigo-600 transition">ログイン</button>
     </form>
+    <div>
+      <a href="{{ url('/register') }}" class="block text-center mt-4 text-gray-600 hover:underline">新規登録</a>
+    </div>
   </div>
 </body>
 
