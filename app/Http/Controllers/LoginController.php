@@ -9,12 +9,14 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     // ログインフォーム表示
-    public function showLogin() {
+    public function showLogin()
+    {
         return view('login');
     }
 
     // ログイン
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
         // リクエストデータ検証
         $validated = $request->validate([
             'email' => 'required|string|max:255',
@@ -34,6 +36,4 @@ class LoginController extends Controller
             'password' => 'パスワードが違います'
         ])->onlyInput('email', 'password');
     }
-
-    
 }
