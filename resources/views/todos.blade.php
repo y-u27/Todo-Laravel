@@ -76,9 +76,13 @@
       @endforeach
     </div>
     <div>
-      <a href="{{ url('/login') }}" class="block text-center mt-4 text-gray-600 hover:underline">ログアウト</a>
+      <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit" class="block text-center mt-4 text-gray-600 hover:underline">
+          ログアウト
+        </button>
+      </form>
     </div>
   </div>
 </body>
-
 </html>
